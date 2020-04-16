@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 
-import { Props } from './Button.types'
+import { ButtonProps } from './Button.types'
 import { colors } from '../core'
 
 export const ButtonStyled = styled.button(({
@@ -10,17 +10,13 @@ export const ButtonStyled = styled.button(({
   mt,
   mr,
   mb
-}: Props) => {
+}: ButtonProps) => {
   const themeStyle = css`
     background-color: ${colors[theme]};
     ${colors[theme] === 'white' ?
       'color: black;' :
       'color: white;'
     }
-  `
-
-  const disabledStyle = css`
-    
   `
 
   const marginLeftStyle = css`
@@ -47,8 +43,9 @@ export const ButtonStyled = styled.button(({
     box-sizing: border-box;
     border: 0;
     padding: 0 16px;
+    outline: none;
 
-    &:hover {
+    &:hover, :focus {
       cursor: pointer;
       background-color: ${rgba(colors[theme], 0.9)};
     }

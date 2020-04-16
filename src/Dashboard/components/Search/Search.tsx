@@ -10,6 +10,10 @@ import Button from '../../../UI/Button'
 const Search = ({ onSubmit }: Props) => {
   const [searchValue, setSearchValue] = useState('')
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value)
+  }
+
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     onSubmit(searchValue)
@@ -17,7 +21,12 @@ const Search = ({ onSubmit }: Props) => {
 
   return (
     <Container onSubmit={handleSubmit}>
-      <Input />
+      <Input
+        value={searchValue}
+        onChange={handleChange}
+        type="search"
+        placeholder="Search"
+      />
       <Button ml={10} type="submit">Search</Button>
     </Container>
   )

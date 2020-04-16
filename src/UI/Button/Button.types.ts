@@ -2,9 +2,9 @@ import React from 'react'
 
 import { colors } from '../core'
 
-export interface Props {
+export interface ButtonProps {
   /* Text value of the button */
-  children: string,
+  children: string | Node,
   /* Whether the button is a submit or a button */
   type?: 'submit' | 'button',
   /* Color of the button */
@@ -22,3 +22,5 @@ export interface Props {
   /* Margin bottom */
   mb?: number
 }
+
+export type Props = ButtonProps & React.HtmlHTMLAttributes<HTMLButtonElement>
