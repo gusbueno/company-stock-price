@@ -10,6 +10,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(({
     type = 'button',
     theme = 'primary',
     isDisabled = false,
+    onClick,
     ml,
     mt,
     mr,
@@ -25,6 +26,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(({
       mt={mt}
       mr={mr}
       mb={mb}
+      onClick={onClick}
       {...others}
     >
       {children}

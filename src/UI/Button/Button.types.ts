@@ -11,6 +11,8 @@ export interface Props {
   theme?: keyof typeof colors,
   /* Whether the button is disabled or not */
   isDisabled?: boolean,
+  /* Function to be executed when the button is clicked */
+  onClick?: () => void,
   /* Margin left */
   ml?: number,
   /* Margin top */
