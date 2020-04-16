@@ -8,3 +8,9 @@ interface DashboardDefaultAction {
 }
 
 export type DashboardActionTypes = DashboardDefaultAction
+
+export interface DashboardProps {
+  onGetCompanyInfo: (symbol: string) => void
+}
+
+export type Props = DashboardProps
