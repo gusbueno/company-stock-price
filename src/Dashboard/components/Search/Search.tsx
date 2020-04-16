@@ -18,7 +18,7 @@ const Search = ({ onSubmit }: Props) => {
   return (
     <Container onSubmit={handleSubmit}>
       <Input />
-      <Button type="submit">Search</Button>
+      <Button ml={10} type="submit">Search</Button>
     </Container>
   )
 }
