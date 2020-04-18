@@ -25,7 +25,7 @@ const Search = ({ onSubmit }: Props) => {
         value={searchValue}
         onChange={handleChange}
         type="search"
-        placeholder="Search"
+        placeholder="Search company by symbol"
       />
       <Button ml={10} type="submit">Search</Button>
     </Container>
