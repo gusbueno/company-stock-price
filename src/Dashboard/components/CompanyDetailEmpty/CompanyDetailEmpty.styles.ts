@@ -11,4 +11,6 @@ export const Container = styled.section`
 export const MainText = styled.h1`
   font-family: Roboto;
   margin-top: 15px;
+  padding: 0 15px;
+  text-align: center;
 `
