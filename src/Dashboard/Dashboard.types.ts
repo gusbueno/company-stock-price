@@ -2,10 +2,18 @@ export const FETCH_COMPANY_DATA_SUCCESS: string = 'FETCH_COMPANY_DATA_SUCCESS'
 
 export interface IQuote {
   open: number,
-  openTime: number,
   close: number,
-  closeTime: number,
-
+  closeTime: string,
+  change: number,
+  changePercent: string,
+  previousClose: number,
+  marketCap: string,
+  high: number,
+  low: number,
+  peRatio: number,
+  volume: number,
+  week52Low: number,
+  week52High: number
 }
 
 export interface ICompany {

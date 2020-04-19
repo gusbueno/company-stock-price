@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import {
   ICompany,
+  IQuote,
   DashboardActionTypes,
   FETCH_COMPANY_DATA_SUCCESS
 } from './Dashboard.types'
@@ -16,6 +17,51 @@ const fetchCompanyDataSuccess = (company: ICompany): DashboardActionTypes => ({
   company
 })
 
+const normalizeCompanyData = (companyData: any, quoteData: any): ICompany => {
+  const { symbol, companyName, website, description, CEO, employees } = companyData
+  const {
+    open,
+    close,
+    closeTime,
+    change,
+    changePercent,
+    previousClose,
+    marketCap,
+    high,
+    low,
+    peRatio,
+    volume,
+    week52Low,
+    week52High
+  } = quoteData
+
+  const quote: IQuote = {
+    open,
+    close,
+    closeTime: new Date(closeTime).toUTCString(),
+    change,
+    changePercent: (changePercent * 100).toFixed(2),
+    previousClose,
+    marketCap: marketCap.toString().slice(0, marketCap.toString().length - 9),
+    high,
+    low,
+    peRatio,
+    volume,
+    week52Low,
+    week52High
+  }
+
+  return {
+    symbol,
+    companyName,
+    website,
+    description,
+    CEO,
+    employees,
+    quote
+  }
+}
+
 export const getCompanyInfo = (symbol: string): ThunkAction<Promise<any>, IStore, undefined, any> => {
   return async (dispatch): Promise<any> => {
     const [err, result] = await to(Promise.all([
@@ -26,9 +72,8 @@ export const getCompanyInfo = (symbol: string): ThunkAction<Promise<any>, IStore
     if (err) {
       return console.log(err)
     }
-    
-    const companyData = result[0].data
-    const companyQuoteData = result[1].data
-    dispatch(fetchCompanyDataSuccess(companyData))
+
+    const company: ICompany = normalizeCompanyData(result[0].data, result[1].data)
+    dispatch(fetchCompanyDataSuccess(company))
   }
 }

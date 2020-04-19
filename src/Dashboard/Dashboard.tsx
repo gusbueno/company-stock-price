@@ -17,7 +17,7 @@ const Dashboard = ({ onGetCompanyInfo, company }: Props) => {
     <Container>
       <Search onSubmit={handleSearchSubmit} />
       {company ?
-        <CompanyDetail /> :
+        <CompanyDetail company={company} /> :
         <CompanyDetailEmpty />
       }
     </Container>

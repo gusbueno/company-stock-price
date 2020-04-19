@@ -11,7 +11,7 @@ const CompanyDetailEmpty = () => (
   <Container>
     <FontAwesomeIcon icon={faHandPointUp} size="4x" />
     <MainText>
-      Use the search bar to look for a company <FontAwesomeIcon icon={faBuilding} inverse />
+      Use the search bar to look for a company <FontAwesomeIcon icon={faBuilding} />
     </MainText>
   </Container>
 )
