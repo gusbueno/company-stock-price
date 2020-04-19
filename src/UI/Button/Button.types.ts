@@ -4,7 +4,7 @@ import { colors } from '../core'
 
 export interface ButtonProps {
   /* Text value of the button */
-  children: string | Node,
+  children: string | Node | any,
   /* Whether the button is a submit or a button */
   type?: 'submit' | 'button',
   /* Color of the button */

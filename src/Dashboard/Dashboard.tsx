@@ -5,8 +5,10 @@ import {
   Container
 } from './Dashboard.styles'
 import Search from './components/Search'
+import CompanyDetailEmpty from './components/CompanyDetailEmpty'
+import CompanyDetail from './components/CompanyDetail'
 
-const Dashboard = ({ onGetCompanyInfo }: Props) => {
+const Dashboard = ({ onGetCompanyInfo, company }: Props) => {
   const handleSearchSubmit = (symbol: string) => {
     onGetCompanyInfo(symbol)
   }
@@ -14,6 +16,10 @@ const Dashboard = ({ onGetCompanyInfo }: Props) => {
   return (
     <Container>
       <Search onSubmit={handleSearchSubmit} />
+      {company ?
+        <CompanyDetail company={company} /> :
+        <CompanyDetailEmpty />
+      }
     </Container>
   )
 }

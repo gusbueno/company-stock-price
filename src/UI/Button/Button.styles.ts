@@ -11,12 +11,13 @@ export const ButtonStyled = styled.button(({
   mr,
   mb
 }: ButtonProps) => {
+  const whiteThemeStyle = css`
+    color: black;
+    border: 1px solid ${colors.primary};
+  `
   const themeStyle = css`
     background-color: ${colors[theme]};
-    ${colors[theme] === 'white' ?
-      'color: black;' :
-      'color: white;'
-    }
+    ${colors[theme] === colors.white && whiteThemeStyle}
   `
 
   const marginLeftStyle = css`
@@ -44,6 +45,7 @@ export const ButtonStyled = styled.button(({
     border: 0;
     padding: 0 16px;
     outline: none;
+    color: ${colors.white};
 
     &:hover, :focus {
       cursor: pointer;
