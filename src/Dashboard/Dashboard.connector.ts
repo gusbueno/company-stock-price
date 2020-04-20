@@ -6,7 +6,7 @@ import {
   getCompany,
   getFavourites
 } from './Dashboard.selectors'
-import { getCompanyInfo } from './Dashboard.actions'
+import { getCompanyInfo, addFavourite, removeFavourite } from './Dashboard.actions'
 
 export const mapStateToProps = (state: IStore) => ({
   company: getCompany(state),
@@ -14,5 +14,7 @@ export const mapStateToProps = (state: IStore) => ({
 })
 
 export const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, unknown, AnyAction>) => ({
-  onGetCompanyInfo: bindActionCreators(getCompanyInfo, dispatch)
+  onGetCompanyInfo: bindActionCreators(getCompanyInfo, dispatch),
+  onAddFavourite: bindActionCreators(addFavourite, dispatch),
+  onRemoveFavourite: bindActionCreators(removeFavourite, dispatch)
 })

@@ -6,6 +6,7 @@ export const Container = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 60vh;
 `
 
 export const MainText = styled.h1`
