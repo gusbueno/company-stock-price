@@ -8,7 +8,7 @@ import Search from './components/Search'
 import CompanyDetailEmpty from './components/CompanyDetailEmpty'
 import CompanyDetail from './components/CompanyDetail'
 
-const Dashboard = ({ onGetCompanyInfo, company }: Props) => {
+const Dashboard = ({ onGetCompanyInfo, company, onAddFavourite, onRemoveFavourite }: Props) => {
   const handleSearchSubmit = (symbol: string) => {
     onGetCompanyInfo(symbol)
   }
@@ -16,9 +16,13 @@ const Dashboard = ({ onGetCompanyInfo, company }: Props) => {
   return (
     <Container>
       <Search onSubmit={handleSearchSubmit} />
-      {company ?
-        <CompanyDetail company={company} /> :
-        <CompanyDetailEmpty />
+      {company ? (
+        <CompanyDetail
+          company={company}
+          onAddFavourite={onAddFavourite}
+          onRemoveFavourite={onRemoveFavourite}  
+        />
+      ) : <CompanyDetailEmpty />
       }
     </Container>
   )

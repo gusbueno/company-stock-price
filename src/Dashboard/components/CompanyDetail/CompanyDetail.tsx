@@ -21,7 +21,15 @@ import {
 } from './CompanyDetail.styles'
 import Button from '../../../UI/Button'
 
-const CompanyDetail = ({ company }: Props) => {
+const CompanyDetail = ({ company, onAddFavourite, onRemoveFavourite }: Props) => {
+  const handleAddFavourite = () => {
+    onAddFavourite(company)
+  }
+
+  const handleRemoveFavourite = () => {
+    onRemoveFavourite(company)
+  }
+
   return (
     <Container>
       <Header>
@@ -29,7 +37,7 @@ const CompanyDetail = ({ company }: Props) => {
           <CompanyNameText>{company.companyName}</CompanyNameText>
           <CompanySymbolText>({company.symbol})</CompanySymbolText>
         </CompanyNameWrapper>
-        <Button theme="white">
+        <Button theme={company.isFavourite ? 'secondary' : 'white'} onClick={ company.isFavourite ? handleRemoveFavourite : handleAddFavourite}>
           <FontAwesomeIcon icon={faHeart} />
         </Button>
       </Header>

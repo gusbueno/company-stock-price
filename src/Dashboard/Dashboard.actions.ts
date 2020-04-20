@@ -5,7 +5,9 @@ import {
   ICompany,
   IQuote,
   DashboardActionTypes,
-  FETCH_COMPANY_DATA_SUCCESS
+  FETCH_COMPANY_DATA_SUCCESS,
+  ADD_FAVOURITE,
+  REMOVE_FAVOURITE
 } from './Dashboard.types'
 import { IStore } from '../store'
 import { to } from '../utils'
@@ -17,7 +19,7 @@ const fetchCompanyDataSuccess = (company: ICompany): DashboardActionTypes => ({
   company
 })
 
-const normalizeCompanyData = (companyData: any, quoteData: any): ICompany => {
+const normalizeCompanyData = (companyData: any, quoteData: any, isFavourite: boolean): ICompany => {
   const { symbol, companyName, website, description, CEO, employees } = companyData
   const {
     open,
@@ -62,12 +64,14 @@ const normalizeCompanyData = (companyData: any, quoteData: any): ICompany => {
     description,
     CEO,
     employees,
-    quote
+    quote,
+    isFavourite
   }
 }
 
 export const getCompanyInfo = (symbol: string): ThunkAction<Promise<any>, IStore, undefined, any> => {
-  return async (dispatch): Promise<any> => {
+  return async (dispatch, getState): Promise<any> => {
+    const { dashboard: { favourites } } = getState()
     const [err, result] = await to(Promise.all([
       axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/company?token=${TOKEN}`),
       axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${TOKEN}`)
@@ -77,7 +81,18 @@ export const getCompanyInfo = (symbol: string): ThunkAction<Promise<any>, IStore
       return console.log(err)
     }
 
-    const company: ICompany = normalizeCompanyData(result[0].data, result[1].data)
+    const isFavourite = Object.keys(favourites).includes(result[0].data.symbol)
+    const company: ICompany = normalizeCompanyData(result[0].data, result[1].data, isFavourite)
     dispatch(fetchCompanyDataSuccess(company))
   }
 }
+
+export const addFavourite = (company: ICompany) => ({
+  type: ADD_FAVOURITE,
+  company
+})
+
+export const removeFavourite = (company: ICompany) => ({
+  type: REMOVE_FAVOURITE,
+  company
+})

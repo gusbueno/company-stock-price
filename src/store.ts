@@ -7,6 +7,6 @@ export interface IStore {
 export default {
   dashboard: {
     company: null,
-    favourites: []
+    favourites: {}
   }
 }
