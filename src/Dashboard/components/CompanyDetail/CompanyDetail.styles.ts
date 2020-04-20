@@ -11,11 +11,11 @@ export const Container = styled.section`
   padding: 15px 0;
   box-sizing: border-box;
   flex-direction: column;
+  flex: 1;
 `
 
 export const Header = styled.div`
   display: flex;
-  flex: 1;
   justify-content: space-between;
   align-items: center;
 `
@@ -86,7 +86,7 @@ export const CloseTimeText = styled.span`
 export const Grid = styled.div`
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill,minmax(240px, 1fr));
   grid-gap: 5px;
 `
 

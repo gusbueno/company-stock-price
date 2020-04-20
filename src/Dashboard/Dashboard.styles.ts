@@ -10,3 +10,8 @@ export const Container = styled.section`
   box-sizing: border-box;
   background-color: ${colors.lightGreen};
 `
+
+export const ContentWrapper = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+`
