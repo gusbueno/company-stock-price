@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faBusinessTime } from '@fortawesome/free-solid-svg-icons'
 
 import { Props } from './CompanyDetail.types'
 import {
@@ -35,19 +35,24 @@ const CompanyDetail = ({ company }: Props) => {
       </Header>
       <Content>
         <PriceWrapper>
-          <CloseValueText>{company.quote.close}</CloseValueText>
+          <CloseValueText>{company.quote.close ? company.quote.close : company.quote.iexRealtimePrice}</CloseValueText>
           <ChangeValueText
             isNegative={company.quote.change < 0}
           >
-            {company.quote.change}
+            <span>{company.quote.change}</span>
           </ChangeValueText>
           <ChangeValueText
             isNegative={company.quote.change < 0}
           >
-            ({company.quote.changePercent}%)
+            (<span>{company.quote.changePercent}%</span>)
           </ChangeValueText>
         </PriceWrapper>
-        <CloseTimeText>At close: {company.quote.closeTime}</CloseTimeText>
+        <CloseTimeText>
+          {company.quote.isUSMarketOpen ?
+            <span><FontAwesomeIcon icon={faBusinessTime} /> Market open</span> :
+            `At close: ${company.quote.closeTime}`
+          }
+        </CloseTimeText>
 
         <Grid>
           <Cell>
@@ -56,7 +61,12 @@ const CompanyDetail = ({ company }: Props) => {
           </Cell>
           <Cell>
             <CellTitleText>Open</CellTitleText>
-            <CellValueText>{company.quote.open}</CellValueText>
+            <CellValueText>
+              {company.quote.open ?
+                company.quote.open :
+                <FontAwesomeIcon icon={faBusinessTime} />
+              }
+            </CellValueText>
           </Cell>
           <Cell>
             <CellTitleText>Market Cap</CellTitleText>
@@ -64,11 +74,21 @@ const CompanyDetail = ({ company }: Props) => {
           </Cell>
           <Cell>
             <CellTitleText>High</CellTitleText>
-            <CellValueText>{company.quote.high}</CellValueText>
+            <CellValueText>
+              {company.quote.high ?
+                company.quote.high :
+                <FontAwesomeIcon icon={faBusinessTime} />
+              }
+            </CellValueText>
           </Cell>
           <Cell>
             <CellTitleText>Low</CellTitleText>
-            <CellValueText>{company.quote.low}</CellValueText>
+            <CellValueText>
+              {company.quote.low ?
+                company.quote.low :
+                <FontAwesomeIcon icon={faBusinessTime} />
+              }
+            </CellValueText>
           </Cell>
           <Cell>
             <CellTitleText>PE Ratio</CellTitleText>
@@ -76,7 +96,12 @@ const CompanyDetail = ({ company }: Props) => {
           </Cell>
           <Cell>
             <CellTitleText>Volume</CellTitleText>
-            <CellValueText>{company.quote.volume}</CellValueText>
+            <CellValueText>
+              {company.quote.volume ?
+                company.quote.volume :
+                <FontAwesomeIcon icon={faBusinessTime} />
+              }
+            </CellValueText>
           </Cell>
           <Cell>
             <CellTitleText>52 Week Range</CellTitleText>

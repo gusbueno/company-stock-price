@@ -13,7 +13,9 @@ export interface IQuote {
   peRatio: number,
   volume: number,
   week52Low: number,
-  week52High: number
+  week52High: number,
+  iexRealtimePrice: number,
+  isUSMarketOpen: boolean
 }
 
 export interface ICompany {

@@ -32,14 +32,16 @@ const normalizeCompanyData = (companyData: any, quoteData: any): ICompany => {
     peRatio,
     volume,
     week52Low,
-    week52High
+    week52High,
+    iexRealtimePrice,
+    isUSMarketOpen
   } = quoteData
 
   const quote: IQuote = {
     open,
     close,
     closeTime: new Date(closeTime).toUTCString(),
-    change,
+    change: parseFloat(change.toFixed(2)),
     changePercent: (changePercent * 100).toFixed(2),
     previousClose,
     marketCap: marketCap.toString().slice(0, marketCap.toString().length - 9),
@@ -48,7 +50,9 @@ const normalizeCompanyData = (companyData: any, quoteData: any): ICompany => {
     peRatio,
     volume,
     week52Low,
-    week52High
+    week52High,
+    iexRealtimePrice,
+    isUSMarketOpen
   }
 
   return {

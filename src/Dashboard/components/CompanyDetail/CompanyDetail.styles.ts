@@ -59,6 +59,9 @@ export const CloseValueText = styled.span`
 export const ChangeValueText = styled.span(({ isNegative }: INegativeText) => {
   const negativeStyle = css`
     color: ${colors.secondary};
+    >span::before {
+      content: "";
+    }
   `
 
   return css`
@@ -66,6 +69,9 @@ export const ChangeValueText = styled.span(({ isNegative }: INegativeText) => {
     font-family: Roboto;
     margin-right: 5px;
     color: ${colors.green};
+    > span::before {
+      content: "+";
+    }
 
     ${isNegative && negativeStyle}
   `
