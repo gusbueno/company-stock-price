@@ -15,17 +15,21 @@ const Dashboard = ({ onGetCompanyInfo, company, onAddFavourite, onRemoveFavourit
     onGetCompanyInfo(symbol)
   }
 
+  const renderCompanyDetail = () => {
+    return company ? (
+      <CompanyDetail
+        company={company}
+        onAddFavourite={onAddFavourite}
+        onRemoveFavourite={onRemoveFavourite}
+      />
+    ) : <CompanyDetailEmpty />
+  }
+
   return (
     <Container>
       <Search onSubmit={handleGetCompanyInfo} />
       <ContentWrapper>
-        {company ? (
-          <CompanyDetail
-            company={company}
-            onAddFavourite={onAddFavourite}
-            onRemoveFavourite={onRemoveFavourite}  
-          />
-        ) : <CompanyDetailEmpty />}
+        {renderCompanyDetail()}
         <FavouriteList favourites={favourites} onLoadFavourite={handleGetCompanyInfo} />
       </ContentWrapper>
     </Container>
