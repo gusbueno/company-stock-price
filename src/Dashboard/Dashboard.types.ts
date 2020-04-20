@@ -1,7 +1,6 @@
 export const FETCH_COMPANY_DATA_SUCCESS: string = 'FETCH_COMPANY_DATA_SUCCESS'
 export const ADD_FAVOURITE: string = 'ADD_FAVOURITE'
 export const REMOVE_FAVOURITE: string = 'REMOVE_FAVOURITE'
-export const LOAD_FAVOURITE: string = 'LOAD_FAVOURITE'
 
 export interface IQuote {
   open: number,
@@ -32,8 +31,13 @@ export interface ICompany {
   isFavourite: boolean
 }
 
+export interface IFavourite {
+  symbol: string,
+  companyName: string
+}
+
 export interface IFavourites {
-  [key: string]: ICompany
+  [key: string]: IFavourite
 }
 
 export interface DashboardState {
@@ -56,18 +60,12 @@ interface DashboardRemoveFavouriteAction {
   company: ICompany
 }
 
-interface DashboardLoadFavouriteAction {
-  type: typeof LOAD_FAVOURITE,
-  company: ICompany
-}
-
-export type DashboardActionTypes = DashboardCompanyAction | DashboardAddFavouriteAction | DashboardRemoveFavouriteAction | DashboardLoadFavouriteAction
+export type DashboardActionTypes = DashboardCompanyAction | DashboardAddFavouriteAction | DashboardRemoveFavouriteAction
 
 export interface DashboardProps {
   onGetCompanyInfo: (symbol: string) => void,
   onAddFavourite: (company: ICompany) => void,
-  onRemoveFavourite: (company: ICompany) => void,
-  onLoadFavourite: (company: ICompany) => void
+  onRemoveFavourite: (company: ICompany) => void
 }
 
 export type Props = DashboardProps & DashboardState

@@ -1,6 +1,6 @@
-import { IFavourites, ICompany } from '../../Dashboard.types'
+import { IFavourites } from '../../Dashboard.types'
 
 export interface Props {
   favourites: IFavourites,
-  onLoadFavourite: (company: ICompany) => void
+  onLoadFavourite: (symbol: string) => void
 }

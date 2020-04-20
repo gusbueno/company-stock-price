@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Props } from './FavouriteList.types'
-import { ICompany } from '../../Dashboard.types'
+import { IFavourite } from '../../Dashboard.types'
 import {
   Container,
   Title,
@@ -13,9 +13,9 @@ import {
 const FavouriteList = ({ favourites, onLoadFavourite }:  Props) => {
   const renderList = () => {
     return Object.keys(favourites).map((key: string) => {
-      const favourite: ICompany = favourites[key]
+      const favourite: IFavourite = favourites[key]
       return (
-        <FavouriteItem key={key} onClick={() => onLoadFavourite(favourite)}>
+        <FavouriteItem key={key} onClick={() => onLoadFavourite(favourite.symbol)}>
           <FavouriteSymbolText>{favourite.symbol}</FavouriteSymbolText>
           <FavouriteNameText>{favourite.companyName}</FavouriteNameText>
         </FavouriteItem>

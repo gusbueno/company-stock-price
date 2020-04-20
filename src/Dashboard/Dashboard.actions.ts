@@ -7,8 +7,7 @@ import {
   DashboardActionTypes,
   FETCH_COMPANY_DATA_SUCCESS,
   ADD_FAVOURITE,
-  REMOVE_FAVOURITE,
-  LOAD_FAVOURITE
+  REMOVE_FAVOURITE
 } from './Dashboard.types'
 import { IStore } from '../store'
 import { to } from '../utils'
@@ -95,10 +94,5 @@ export const addFavourite = (company: ICompany) => ({
 
 export const removeFavourite = (company: ICompany) => ({
   type: REMOVE_FAVOURITE,
-  company
-})
-
-export const loadFavourite = (company: ICompany) => ({
-  type: LOAD_FAVOURITE,
   company
 })

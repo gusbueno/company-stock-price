@@ -10,14 +10,14 @@ import CompanyDetailEmpty from './components/CompanyDetailEmpty'
 import CompanyDetail from './components/CompanyDetail'
 import FavouriteList from './components/FavouriteList'
 
-const Dashboard = ({ onGetCompanyInfo, company, onAddFavourite, onRemoveFavourite, favourites, onLoadFavourite }: Props) => {
-  const handleSearchSubmit = (symbol: string) => {
+const Dashboard = ({ onGetCompanyInfo, company, onAddFavourite, onRemoveFavourite, favourites }: Props) => {
+  const handleGetCompanyInfo = (symbol: string) => {
     onGetCompanyInfo(symbol)
   }
 
   return (
     <Container>
-      <Search onSubmit={handleSearchSubmit} />
+      <Search onSubmit={handleGetCompanyInfo} />
       <ContentWrapper>
         {company ? (
           <CompanyDetail
@@ -26,7 +26,7 @@ const Dashboard = ({ onGetCompanyInfo, company, onAddFavourite, onRemoveFavourit
             onRemoveFavourite={onRemoveFavourite}  
           />
         ) : <CompanyDetailEmpty />}
-        <FavouriteList favourites={favourites} onLoadFavourite={onLoadFavourite} />
+        <FavouriteList favourites={favourites} onLoadFavourite={handleGetCompanyInfo} />
       </ContentWrapper>
     </Container>
   )
