@@ -56,10 +56,7 @@ const CompanyDetail = ({ company, onAddFavourite, onRemoveFavourite }: Props) =>
           </ChangeValueText>
         </PriceWrapper>
         <CloseTimeText>
-          {company.quote.isUSMarketOpen ?
-            <span><FontAwesomeIcon icon={faBusinessTime} /> Market open</span> :
-            `At close: ${company.quote.closeTime}`
-          }
+          <span><FontAwesomeIcon icon={faBusinessTime} /> Market open</span>
         </CloseTimeText>
 
         <Grid>

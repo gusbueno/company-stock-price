@@ -17,6 +17,7 @@ const Search = ({ onSubmit }: Props) => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     onSubmit(searchValue)
+    setSearchValue('')
   }
 
   return (

@@ -9,8 +9,9 @@ import Search from './components/Search'
 import CompanyDetailEmpty from './components/CompanyDetailEmpty'
 import CompanyDetail from './components/CompanyDetail'
 import FavouriteList from './components/FavouriteList'
+import CompanyDetailLoading from './components/CompanyDetailLoading'
 
-const Dashboard = ({ onGetCompanyInfo, company, onAddFavourite, onRemoveFavourite, favourites }: Props) => {
+const Dashboard = ({ onGetCompanyInfo, company, onAddFavourite, onRemoveFavourite, favourites, isFetching }: Props) => {
   const handleGetCompanyInfo = (symbol: string) => {
     onGetCompanyInfo(symbol)
   }
@@ -29,7 +30,7 @@ const Dashboard = ({ onGetCompanyInfo, company, onAddFavourite, onRemoveFavourit
     <Container>
       <Search onSubmit={handleGetCompanyInfo} />
       <ContentWrapper>
-        {renderCompanyDetail()}
+        {isFetching ? <CompanyDetailLoading /> : renderCompanyDetail()}
         <FavouriteList favourites={favourites} onLoadFavourite={handleGetCompanyInfo} />
       </ContentWrapper>
     </Container>
