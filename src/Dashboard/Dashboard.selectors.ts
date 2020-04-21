@@ -12,3 +12,8 @@ export const getFavourites = createSelector(
   [getDashboard],
   ({ favourites }) => favourites
 )
+
+export const getIsFetching = createSelector(
+  [getDashboard],
+  ({ isFetching }) => isFetching
+)

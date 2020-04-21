@@ -6,6 +6,8 @@ import {
   IQuote,
   DashboardActionTypes,
   FETCH_COMPANY_DATA_SUCCESS,
+  FETCH_COMPANY_DATA_START,
+  FETCH_COMPANY_DATA_FAIL,
   ADD_FAVOURITE,
   REMOVE_FAVOURITE
 } from './Dashboard.types'
@@ -20,6 +22,14 @@ let sourceCompanyInfoRequest: CancelTokenSource = null
 const fetchCompanyDataSuccess = (company: ICompany): DashboardActionTypes => ({
   type: FETCH_COMPANY_DATA_SUCCESS,
   company
+})
+
+const fetchCompanyDataStart = (): DashboardActionTypes => ({
+  type: FETCH_COMPANY_DATA_START
+})
+
+const fetchCompanyDataFail = (): DashboardActionTypes => ({
+  type: FETCH_COMPANY_DATA_FAIL
 })
 
 const normalizeCompanyData = (companyData: any, quoteData: any, isFavourite: boolean): ICompany => {
@@ -83,6 +93,7 @@ export const getCompanyInfo = (symbol: string): ThunkAction<Promise<any>, IStore
     }
 
     sourceCompanyInfoRequest = CancelToken.source()
+    dispatch(fetchCompanyDataStart())
     const [err, result] = await to(Promise.all([
       axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/company?token=${TOKEN}`, {
         cancelToken: sourceCompanyInfoRequest.token
@@ -94,6 +105,7 @@ export const getCompanyInfo = (symbol: string): ThunkAction<Promise<any>, IStore
 
     sourceCompanyInfoRequest = null
     if (err) {
+      dispatch(fetchCompanyDataFail())
       return console.log(err)
     }
 
@@ -103,12 +115,12 @@ export const getCompanyInfo = (symbol: string): ThunkAction<Promise<any>, IStore
   }
 }
 
-export const addFavourite = (company: ICompany) => ({
+export const addFavourite = (company: ICompany): DashboardActionTypes => ({
   type: ADD_FAVOURITE,
   company
 })
 
-export const removeFavourite = (company: ICompany) => ({
+export const removeFavourite = (company: ICompany): DashboardActionTypes => ({
   type: REMOVE_FAVOURITE,
   company
 })

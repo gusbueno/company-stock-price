@@ -4,21 +4,38 @@ import {
   DashboardState,
   FETCH_COMPANY_DATA_SUCCESS,
   ADD_FAVOURITE,
-  REMOVE_FAVOURITE
+  REMOVE_FAVOURITE,
+  FETCH_COMPANY_DATA_START,
+  FETCH_COMPANY_DATA_FAIL
 } from './Dashboard.types'
 
 const defaultState: DashboardState = store.dashboard
 
 const dashboard = (state = defaultState, action: DashboardActionTypes): DashboardState => {
   switch (action.type) {
+    case FETCH_COMPANY_DATA_START: {
+      return {
+        ...state,
+        isFetching: true
+      }
+    }
     case FETCH_COMPANY_DATA_SUCCESS: {
+      // @ts-ignore
       const { company } = action
       return {
         ...state,
-        company
+        company,
+        isFetching: false
+      }
+    }
+    case FETCH_COMPANY_DATA_FAIL: {
+      return {
+        ...state,
+        isFetching: false
       }
     }
     case ADD_FAVOURITE: {
+      // @ts-ignore
       const { company } = action
       return {
         ...state,
@@ -36,6 +53,7 @@ const dashboard = (state = defaultState, action: DashboardActionTypes): Dashboar
       }
     }
     case REMOVE_FAVOURITE: {
+      // @ts-ignore
       const { company } = action
       const { [company.symbol]: _, ...newFavourites } = state.favourites
       return {

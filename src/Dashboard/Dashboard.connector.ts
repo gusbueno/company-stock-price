@@ -4,13 +4,15 @@ import { ThunkDispatch } from 'redux-thunk'
 import { IStore } from '../store'
 import {
   getCompany,
-  getFavourites
+  getFavourites,
+  getIsFetching
 } from './Dashboard.selectors'
 import { getCompanyInfo, addFavourite, removeFavourite } from './Dashboard.actions'
 
 export const mapStateToProps = (state: IStore) => ({
   company: getCompany(state),
-  favourites: getFavourites(state)
+  favourites: getFavourites(state),
+  isFetching: getIsFetching(state)
 })
 
 export const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, unknown, AnyAction>) => ({
