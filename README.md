@@ -2,9 +2,10 @@
 Search for companies so that to see their basic details as well as their current stock price :chart_with_upwards_trend:
 
 <div style="display: inline-block; vertical-align: top;">
-<img src="image_1.png" alt="screenshot 1" width="200">
-<img src="image_2.png" alt="screenshot 2" width="200">
-<img src="image_3.png" alt="screenshot 3" width="200">
+  <img src="image_1.png" alt="screenshot 1" width="200">
+  <img src="image_2.png" alt="screenshot 2" width="200">
+  <img src="image_3.png" alt="screenshot 3" width="200">
+</div>
 
 ## Installation
 1. Run `yarn install` so that to install all the dependencies needed
