@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk'
-import axios from 'axios'
+import axios, { CancelTokenSource } from 'axios'
 
 import {
   ICompany,
@@ -13,6 +13,9 @@ import { IStore } from '../store'
 import { to } from '../utils'
 
 const TOKEN: string = process.env.IEX_TOKEN || ''
+const CancelToken = axios.CancelToken
+let sourceCompanyInfoRequest: CancelTokenSource = null
+
 
 const fetchCompanyDataSuccess = (company: ICompany): DashboardActionTypes => ({
   type: FETCH_COMPANY_DATA_SUCCESS,
@@ -36,13 +39,14 @@ const normalizeCompanyData = (companyData: any, quoteData: any, isFavourite: boo
     week52Low,
     week52High,
     iexRealtimePrice,
+    iexLastUpdated,
     isUSMarketOpen
   } = quoteData
 
   const quote: IQuote = {
     open,
     close,
-    closeTime: new Date(closeTime).toUTCString(),
+    closeTime: closeTime ? new Date(closeTime).toUTCString() : null,
     change: parseFloat(change.toFixed(2)),
     changePercent: (changePercent * 100).toFixed(2),
     previousClose,
@@ -54,6 +58,7 @@ const normalizeCompanyData = (companyData: any, quoteData: any, isFavourite: boo
     week52Low,
     week52High,
     iexRealtimePrice,
+    iexLastUpdated: iexLastUpdated ? new Date(iexLastUpdated).toUTCString() : null,
     isUSMarketOpen
   }
 
@@ -72,11 +77,22 @@ const normalizeCompanyData = (companyData: any, quoteData: any, isFavourite: boo
 export const getCompanyInfo = (symbol: string): ThunkAction<Promise<any>, IStore, undefined, any> => {
   return async (dispatch, getState): Promise<any> => {
     const { dashboard: { favourites } } = getState()
+
+    if (sourceCompanyInfoRequest) {
+      sourceCompanyInfoRequest.cancel('Request canceled')
+    }
+
+    sourceCompanyInfoRequest = CancelToken.source()
     const [err, result] = await to(Promise.all([
-      axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/company?token=${TOKEN}`),
-      axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${TOKEN}`)
+      axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/company?token=${TOKEN}`, {
+        cancelToken: sourceCompanyInfoRequest.token
+      }),
+      axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${TOKEN}`, {
+        cancelToken: sourceCompanyInfoRequest.token
+      })
     ]))
-    
+
+    sourceCompanyInfoRequest = null
     if (err) {
       return console.log(err)
     }

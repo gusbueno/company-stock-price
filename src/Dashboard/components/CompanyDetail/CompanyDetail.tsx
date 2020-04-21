@@ -58,7 +58,7 @@ const CompanyDetail = ({ company, onAddFavourite, onRemoveFavourite }: Props) =>
         <CloseTimeText>
           {company.quote.isUSMarketOpen ?
             <span><FontAwesomeIcon icon={faBusinessTime} /> Market open</span> :
-            `At close: ${company.quote.closeTime}`
+            `At close: ${company.quote.closeTime ? company.quote.closeTime : company.quote.iexLastUpdated}`
           }
         </CloseTimeText>
 

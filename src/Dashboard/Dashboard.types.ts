@@ -17,6 +17,7 @@ export interface IQuote {
   week52Low: number,
   week52High: number,
   iexRealtimePrice: number,
+  iexLastUpdated: string,
   isUSMarketOpen: boolean
 }
 
